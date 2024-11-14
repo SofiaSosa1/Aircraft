@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
+    // Asignar el evento al botón de envío
     const enviarButton = document.getElementById("enviarDatos");
     const form = document.getElementById("formPasajero");
     const mensajeDiv = document.getElementById("mensaje");
@@ -9,63 +10,41 @@ document.addEventListener("DOMContentLoaded", () => {
         const pasajero = obtenerDatosPersonales(); // Llamamos a la función para obtener los datos
 
         // Verificar si los datos son válidos antes de continuar
-        if (!pasajero) {
-            console.log("No se obtuvieron datos del formulario.");
-            return;
-        }
-
-        console.log("Datos del pasajero para enviar:", pasajero); // Verificar qué datos se están enviando
+        if (!pasajero) return;
 
         guardarPasajeroEnLocalStorage(pasajero); // Guardamos los datos en LocalStorage
 
+        const formData = new FormData(form);
+    
         try {
-            // Enviar los datos al servidor en formato JSON
+            // Enviar los datos al servidor mediante fetch
             const response = await fetch("agregar_pasajeros.php", {
                 method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(pasajero) // Convertir el objeto a JSON
+                body: formData
             });
 
-            // Verificar si la respuesta es exitosa (HTTP 200)
-            if (!response.ok) {
-                throw new Error("Error en la respuesta del servidor");
-            }
-
-            // Intentar convertir la respuesta a JSON
             const result = await response.json();
-            console.log("Respuesta del servidor:", result);
-
-            // Verificar si la respuesta contiene éxito
             if (result.success) {
-                console.log("Entre al if");
                 mensajeDiv.innerHTML = `<p class="alert alert-success">${result.message}</p>`;
                 form.reset();
                 // Redirigir a la página "miVuelo.html" después de un corto retardo
                 setTimeout(() => {
-                    window.location.href = "miVuelo.html"; // Redirigir correctamente
+                    window.location.href = "miVuelo.html";
                 }, 2000);
             } else {
-                console.log("Entre al else");
                 mensajeDiv.innerHTML = `<p class="alert alert-danger">${result.message}</p>`;
-                // Si los datos no se han procesado correctamente, redirigir a datosPersonales.html
-                setTimeout(() => {
-                    window.location.href = "datosPersonales.html"; // Redirige a la página de datos personales
-                }, 2000); // Retardo de 2 segundos antes de la redirección
             }
         } catch (error) {
-            console.log("Error al procesar la respuesta JSON:", error);
-          //  mensajeDiv.innerHTML = `<p class="alert alert-danger">Ocurrió un error al enviar los datos. Por favor, inténtalo nuevamente.</p>`;
-            setTimeout(() => {
-                window.location.href = "miVuelo.html"; // Redirige a la página de datos personales en caso de error
-            }, 2000); // Retardo de 2 segundos antes de la redirección
+            console.log(error);
+          // mensajeDiv.innerHTML = `<p class="alert alert-danger">Ocurrió un error al enviar los datos. Por favor, inténtalo nuevamente.</p>`;
         }
+        window.location.href = "miVuelo.html";
     });
 });
 
 // Función para obtener los datos del formulario
 function obtenerDatosPersonales() {
+    // Capturar los datos del formulario
     const nombre = document.getElementById("nombre").value;
     const apellido = document.getElementById("apellido").value;
     const fechaNacimiento = document.getElementById("fech_naci").value;
@@ -75,10 +54,14 @@ function obtenerDatosPersonales() {
     const dni = document.getElementById("dni").value;
     const genero = document.getElementById("genero").value;
 
-    // Verificar si los valores de nacionalidad y género están seleccionados
-    if (!pais || !genero) {
-        alert("Por favor, selecciona una nacionalidad y un género.");
-        return null; // Si falta la nacionalidad o el género, retornamos null
+    // Verificar si los valores de nacionalidad y genero están seleccionados
+    if (!pais) {
+        alert("Por favor, selecciona una nacionalidad.");
+        return null; // Si falta la nacionalidad, retornamos null
+    }
+    if (!genero) {
+        alert("Por favor, selecciona un género.");
+        return null; // Si falta el género, retornamos null
     }
 
     // Crear un objeto con los datos personales del pasajero
@@ -99,7 +82,10 @@ function obtenerDatosPersonales() {
 
 // Función para guardar el pasajero en el localStorage
 function guardarPasajeroEnLocalStorage(pasajero) {
+    // Obtener el array de pasajeros del localStorage, o crear uno nuevo si no existe
     let pasajeros = JSON.parse(localStorage.getItem("pasajeros")) || [];
+    // Agregar el nuevo pasajero al array
     pasajeros.push(pasajero);
+    // Guardar el array actualizado en el localStorage
     localStorage.setItem("pasajeros", JSON.stringify(pasajeros));
 }

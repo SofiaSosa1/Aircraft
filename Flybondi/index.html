@@ -131,60 +131,62 @@
 <!--PEXELS PARA IMAGENES MEJOR CALIDAD-->
 
       <div id="form-list">
-        <select id="origen" class="form-select" aria-label="Default select example"  onchange="checkSameSelection()">
-          <option selected>Origen</option>
-          <option>Buenos Aires (BUE)</option>
-          <option>Bariloche (BRC)</option>
-          <option>Comodoro Rivadavia (CRD)</option>
-          <option>Córdoba (COR)</option>
-          <option>Corrientes (CNQ)</option>
-          <option>El Calafate (FTE)</option>
-          <option>Florianópolis (FLN)</option>
-          <option >Jujuy (JUJ)</option>
-          <option >Mendoza ( MDZ) </option>
-          <option >Neuquen (NQN)</option>
-          <option >Posadas (PSS)</option>
-          <option >Puerto Iguazu (IGR)</option>
-          <option >Puerto Madryn (PMY)</option>
-          <option >Rio de Janerio (RIO)</option>
-          <option >Salta(SLA)</option>
-          <option >San Juan (UAQ)</option>
-          <option >Santiago del Estero (SOE)</option>
-          <option >Sao Paoblo (SAO)</option>
-          <option >Tucumán (TUC)</option>
-          <option >Ushuaia (USH)</option>
-
-        </select>
-
-        <select id="destino" class="form-select" aria-label="Default select example" onchange="checkSameSelection()">
-          <option selected>Destino</option>
-          <option>Buenos Aires (BUE)</option>
-          <option>Bariloche (BRC)</option>
-          <option>Comodoro Rivadavia (CRD)</option>
-          <option>Córdoba (COR)</option>
-          <option>Corrientes (CNQ)</option>
-          <option>El Calafate (FTE)</option>
-          <option>Florianópolis (FLN)</option>
-          <option >Jujuy (JUJ)</option>
-          <option >Mendoza ( MDZ) </option>
-          <option >Neuquen (NQN)</option>
-          <option >Posadas (PSS)</option>
-          <option >Puerto Iguazu (IGR)</option>
-          <option >Puerto Madryn (PMY)</option>
-          <option >Rio de Janerio (RIO)</option>
-          <option >Salta(SLA)</option>
-          <option >San Juan (UAQ)</option>
-          <option >Santiago del Estero (SOE)</option>
-          <option >Sao Paoblo (SAO)</option>
-          <option >Tucumán (TUC)</option>
-          <option >Ushuaia (USH)</option>
-        </select>
- 
-          <label id="cant" for="" style="color:white; font-family: Georgia, 'Times New Roman', Times, serif; font-size: 18px; margin-top: -1.5%;">Cantidad de Pasajaeros: 1</label>
-         
+        <form action="agregar_ruta.php" method="POST" id="routeForm">
+          <select id="origen" name="origen"  class="form-select" aria-label="Default select example"  onchange="checkSameSelection()">
+            <option selected>Origen</option>
+            <option>Buenos Aires (BUE)</option>
+            <option>Bariloche (BRC)</option>
+            <option>Comodoro Rivadavia (CRD)</option>
+            <option>Córdoba (COR)</option>
+            <option>Corrientes (CNQ)</option>
+            <option>El Calafate (FTE)</option>
+            <option>Florianópolis (FLN)</option>
+            <option >Jujuy (JUJ)</option>
+            <option >Mendoza ( MDZ) </option>
+            <option >Neuquen (NQN)</option>
+            <option >Posadas (PSS)</option>
+            <option >Puerto Iguazu (IGR)</option>
+            <option >Puerto Madryn (PMY)</option>
+            <option >Rio de Janerio (RIO)</option>
+            <option >Salta(SLA)</option>
+            <option >San Juan (UAQ)</option>
+            <option >Santiago del Estero (SOE)</option>
+            <option >Sao Paoblo (SAO)</option>
+            <option >Tucumán (TUC)</option>
+            <option >Ushuaia (USH)</option>
   
+          </select>
+  
+          <select id="destino" name="destino" class="form-select" aria-label="Default select example" onchange="checkSameSelection()">
+            <option selected>Destino</option>
+            <option>Buenos Aires (BUE)</option>
+            <option>Bariloche (BRC)</option>
+            <option>Comodoro Rivadavia (CRD)</option>
+            <option>Córdoba (COR)</option>
+            <option>Corrientes (CNQ)</option>
+            <option>El Calafate (FTE)</option>
+            <option>Florianópolis (FLN)</option>
+            <option >Jujuy (JUJ)</option>
+            <option >Mendoza ( MDZ) </option>
+            <option >Neuquen (NQN)</option>
+            <option >Posadas (PSS)</option>
+            <option >Puerto Iguazu (IGR)</option>
+            <option >Puerto Madryn (PMY)</option>
+            <option >Rio de Janerio (RIO)</option>
+            <option >Salta(SLA)</option>
+            <option >San Juan (UAQ)</option>
+            <option >Santiago del Estero (SOE)</option>
+            <option >Sao Paoblo (SAO)</option>
+            <option >Tucumán (TUC)</option>
+            <option >Ushuaia (USH)</option>
+          </select>
+   
+            <label id="cant" for="" style="color:white; font-family: Georgia, 'Times New Roman', Times, serif; font-size: 18px; margin-top: -1.5%;">Cantidad de Pasajaeros: 1</label>
+           
+    
+        </form>
       </div>
-   <button id="enviarBtn" type="button" class="btn btn-dark" onclick="enviarBtn()" disabled>Enviar</button>
+   <button id="enviarBtn" type="button" class="btn btn-dark"  disabled>Enviar</button>
     
     
 
